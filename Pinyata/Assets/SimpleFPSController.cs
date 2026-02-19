@@ -2,121 +2,213 @@ using UnityEngine;
 
 public class SimpleFPSController : MonoBehaviour
 {
-    [Header("Hareket Ayarlari")]
-    public float moveSpeed = 5f;
-    public float mouseSensitivity = 3f;
-    public GameObject interactUI; 
+    [Header("Hareket Ayarları")]
+    public float moveSpeed = 4f;
+    public float mouseSensitivity = 2f;
+    public float gravity = -9.81f;
 
-    float yaw, pitch;
-    Rigidbody rb;
-    Camera cam;
-    public Animator anim; // Inspector'dan X Bot'u buraya surukle
-    bool isSitting = false;
-    Transform currentSitPoint;
+    [Header("Kamera & Sallanma")]
+    public Transform playerCamera;
+    [Range(0, 1)] public float swaySmoothing = 0.15f;
+    public float idleSwaySpeed = 1.5f;
+    public float idleSwayAmount = 0.03f;
+    public float walkSwaySpeed = 10f;
+    public float walkSwayAmount = 0.05f;
 
-    void Awake()
+    [Header("Etkileşim (Oturma)")]
+    public GameObject eButtonUI; 
+    public Transform sofaSitPoint; 
+    public float interactDistance = 4f; 
+    public float sitHeightOffset = -0.6f; 
+    public float sittingCameraHeight = 0.6f; 
+    public float sittingYawLimit = 60f; 
+    
+    private bool isSitting = false;
+    private Vector3 standPosition;
+    private CharacterController controller;
+    private Animator anim; 
+    private float xRotation = 0f;
+    private float yRotation = 0f;
+    private float sittingCenterYaw; 
+    private Vector3 velocity;
+    
+    private Vector3 cameraDefaultLocalPos;
+    private float timer = 0f;
+
+    void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        cam = GetComponentInChildren<Camera>();
-        
-        // Eger Inspector'da atanmamissa otomatik bulmaya calis
-        if (anim == null) anim = GetComponentInChildren<Animator>(); 
-
-        rb.freezeRotation = true;
-        
-        // Fareyi ekrana kilitler, boylece karakter "odaklanir"
+        controller = GetComponent<CharacterController>();
+        anim = GetComponentInChildren<Animator>(); 
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+
+        if (playerCamera == null) playerCamera = Camera.main.transform;
+        cameraDefaultLocalPos = playerCamera.localPosition;
+        yRotation = transform.eulerAngles.y;
     }
 
     void Update()
     {
-        // Fare ile bakis kodlari
-        yaw += Input.GetAxisRaw("Mouse X") * mouseSensitivity;
-        pitch -= Input.GetAxisRaw("Mouse Y") * mouseSensitivity;
-        pitch = Mathf.Clamp(pitch, -80f, 80f);
-        
         if (isSitting)
         {
-            float targetYaw = currentSitPoint.eulerAngles.y;
-            yaw = Mathf.Clamp(yaw, targetYaw - 75f, targetYaw + 75f);
-            cam.transform.rotation = Quaternion.Euler(pitch, yaw, 0f);
-        }
-        else
-        {
-            transform.rotation = Quaternion.Euler(0f, yaw, 0f);
-            cam.transform.localRotation = Quaternion.Euler(pitch, 0f, 0f);
+            // FİZİKSEL ÇAKIŞMAYI ENGELLE: Karakterin konumunu ve gövde rotasyonunu her karede zorla sabitle
+            transform.position = sofaSitPoint.position + new Vector3(0, sitHeightOffset, 0);
+            transform.rotation = Quaternion.Euler(0f, sofaSitPoint.eulerAngles.y, 0f);
             
-            // --- YURUME ANIMASYONU KONTROLU ---
-            if (anim != null)
-            {
-                // Yatay hizi hesapla (Y eksenini dahil etme ki ziplarken animasyon bozulmasin)
-                float horizontalVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z).magnitude;
-                float animationSpeed = horizontalVelocity / moveSpeed;
-                
-                // Gecis suresini (0.1f) sildik, boylece tus birakildigi an animasyon DURUR
-                anim.SetFloat("Speed", animationSpeed);
-            }
-
-            CheckForInteractable();
+            if (Input.GetKeyDown(KeyCode.E)) StandUp();
+            return;
         }
 
-        if (currentSitPoint != null && Input.GetKeyDown(KeyCode.E))
-        {
-            if (!isSitting) Otur(); else Kalk();
-        }
+        HandleMovement();
+        HandleInteraction();
     }
 
-    void FixedUpdate()
+    void LateUpdate()
     {
-        if (isSitting) return;
+        HandleRotationAndCamera();
+    }
+
+    void HandleMovement()
+    {
+        if (controller == null || !controller.enabled || isSitting) return;
 
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
-        Vector3 move = (transform.right * x + transform.forward * z).normalized;
+
+        Vector3 move = transform.right * x + transform.forward * z;
+        if (move.magnitude > 1) move.Normalize();
+
+        controller.Move(move * moveSpeed * Time.deltaTime);
         
-        if (move.magnitude > 0.1f) 
+        if (controller.isGrounded && velocity.y < 0) velocity.y = -2f;
+        velocity.y += gravity * Time.deltaTime;
+        controller.Move(velocity * Time.deltaTime);
+    }
+
+    void HandleRotationAndCamera()
+    {
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
+
+        xRotation -= mouseY;
+        xRotation = Mathf.Clamp(xRotation, -80f, 80f);
+        yRotation += mouseX;
+
+        if (isSitting)
         {
-            // Hareket varsa hizi uygula
-            rb.linearVelocity = new Vector3(move.x * moveSpeed, rb.linearVelocity.y, move.z * moveSpeed);
-        } 
-        else 
+            // OTURURKEN: Gövde (transform) asla dönmez, sadece kamera (playerCamera) döner
+            yRotation = Mathf.Clamp(yRotation, sittingCenterYaw - sittingYawLimit, sittingCenterYaw + sittingYawLimit);
+            
+            // Kamera pozisyonunu güncelle
+            playerCamera.position = transform.position + new Vector3(0, sittingCameraHeight, 0);
+            
+            // Dönme hatasını sıfırlayan kritik hesaplama
+            playerCamera.localRotation = Quaternion.Euler(xRotation, yRotation - sittingCenterYaw, 0f);
+        }
+        else
         {
-            // TUS BIRAKILDIGI AN HIZI SIFIRLA (Kaymayi ve isinlanmayi onler)
-            rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0); 
+            // AYAKTAYKEN
+            transform.rotation = Quaternion.Euler(0f, yRotation, 0f);
+            playerCamera.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+
+            // Engel Kontrolü
+            CheckObstacles();
+
+            // Sway (Sallanma) Uygula
+            ApplySway();
         }
     }
 
-    void Otur()
+    void CheckObstacles()
     {
-        isSitting = true; 
-        rb.isKinematic = true; 
-        transform.position = currentSitPoint.position;
-        transform.rotation = currentSitPoint.rotation;
-        if(anim != null) anim.Play("Sit"); 
-    }
+        bool isBlocked = false;
+        float inputZ = Input.GetAxisRaw("Vertical");
+        float inputX = Input.GetAxisRaw("Horizontal");
 
-    void Kalk()
-    {
-        isSitting = false; 
-        rb.isKinematic = false; 
-        if(anim != null) anim.Play("Movement"); 
-        transform.position += transform.forward * 0.8f;
-    }
-
-    void CheckForInteractable()
-    {
-        RaycastHit hit;
-        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 3f))
+        if (Mathf.Abs(inputZ) > 0.1f || Mathf.Abs(inputX) > 0.1f)
         {
-            if (hit.collider.CompareTag("Couch"))
+            Vector3 moveDir = (transform.right * inputX + transform.forward * inputZ).normalized;
+            Vector3 lowRay = transform.position + Vector3.up * 0.4f;
+            Vector3 highRay = transform.position + Vector3.up * 1.2f;
+
+            RaycastHit hit;
+            if (Physics.Raycast(lowRay, moveDir, out hit, 0.8f) || Physics.Raycast(highRay, moveDir, out hit, 0.8f))
             {
-                currentSitPoint = hit.collider.transform.Find("SitPoint");
-                if (interactUI != null) interactUI.SetActive(true);
-                return;
+                if (!hit.collider.CompareTag("SitTarget")) isBlocked = true;
             }
         }
-        currentSitPoint = null;
-        if (interactUI != null) interactUI.SetActive(false);
+
+        if (anim != null)
+        {
+            anim.SetFloat("Vertical", isBlocked ? 0f : inputZ);
+            anim.SetBool("IsWalking", (inputZ != 0 || inputX != 0) && !isBlocked);
+        }
+    }
+
+    void ApplySway()
+    {
+        float inputZ = Input.GetAxisRaw("Vertical");
+        float inputX = Input.GetAxisRaw("Horizontal");
+        bool isMoving = (inputZ != 0 || inputX != 0);
+
+        Vector3 targetLocalPos = cameraDefaultLocalPos;
+        if (isMoving && anim != null && anim.GetBool("IsWalking"))
+        {
+            timer += Time.deltaTime * walkSwaySpeed;
+            targetLocalPos.y += Mathf.Sin(timer) * walkSwayAmount;
+            targetLocalPos.x += Mathf.Cos(timer / 2) * (walkSwayAmount * 0.5f);
+        }
+        else
+        {
+            timer += Time.deltaTime * idleSwaySpeed;
+            targetLocalPos.y += Mathf.Sin(timer) * idleSwayAmount;
+        }
+        playerCamera.localPosition = Vector3.Lerp(playerCamera.localPosition, targetLocalPos, swaySmoothing);
+    }
+
+    void HandleInteraction()
+    {
+        if (isSitting) return;
+
+        RaycastHit hit;
+        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, interactDistance))
+        {
+            if (hit.collider.CompareTag("SitTarget"))
+            {
+                if (eButtonUI != null && !eButtonUI.activeSelf) eButtonUI.SetActive(true);
+                if (Input.GetKeyDown(KeyCode.E)) SitDown();
+            }
+            else if (eButtonUI != null && eButtonUI.activeSelf) eButtonUI.SetActive(false);
+        }
+        else if (eButtonUI != null && eButtonUI.activeSelf) eButtonUI.SetActive(false);
+    }
+
+    void SitDown()
+    {
+        if (sofaSitPoint == null) return;
+        standPosition = transform.position; 
+        isSitting = true;
+        controller.enabled = false; 
+
+        transform.position = sofaSitPoint.position + new Vector3(0, sitHeightOffset, 0);
+        transform.rotation = Quaternion.Euler(0f, sofaSitPoint.eulerAngles.y, 0f);
+        
+        sittingCenterYaw = sofaSitPoint.eulerAngles.y;
+        yRotation = sittingCenterYaw; 
+        xRotation = 0; 
+
+        if (anim != null) 
+        {
+            anim.SetFloat("Vertical", 0f);
+            anim.SetBool("IsSitting", true);
+        }
+        if (eButtonUI != null) eButtonUI.SetActive(false);
+    }
+
+    void StandUp()
+    {
+        isSitting = false;
+        controller.enabled = true; 
+        transform.position = standPosition + Vector3.up * 0.1f; 
+        if (anim != null) anim.SetBool("IsSitting", false);
     }
 }
