@@ -1,0 +1,21 @@
+using UnityEngine;
+using UnityEngine.playables;
+
+public class CinematicEnd : MonoBehaviour
+{
+    public PlayableDirector director;
+    public GameObject playerMovementScript; // Karakter hareket kodun
+    public GameObject gameCamera;           // Oyun içi kameran
+
+    void OnEnable() {
+        director.stopped += OnPlayableDirectorStopped;
+    }
+
+    void OnPlayableDirectorStopped(PlayableDirector aDirector) {
+        if (director == aDirector) {
+            playerMovementScript.SetActive(true); // Hareket kodunu aç
+            gameCamera.SetActive(true);           // Kamerayı aç
+            Debug.Log("Sinematik bitti, kontrol oyuncuda!");
+        }
+    }
+}
