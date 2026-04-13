@@ -7,11 +7,14 @@ TagManager:
   - Couch
   - SitTarget
   - Radio
+  - Kapi
+  - NPC
+  - Karakter
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Examine
   - Water
   - UI
   - 

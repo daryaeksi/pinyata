@@ -17,12 +17,16 @@ public class SimpleFPSController : MonoBehaviour
 
     [Header("Etkilesim Ayarlari")]
     public GameObject eButtonUI; 
+    public GameObject noktaImleci; 
     public Transform sofaSitPoint; 
-    public float interactDistance = 4f; 
+    public float interactDistance = 5f; 
+    public float npcBakmaMesafesi = 10f; 
     public float sitHeightOffset = -0.6f; 
     public float sittingCameraHeight = 0.6f; 
     public float sittingYawLimit = 60f; 
     public string radioTag = "Radio"; 
+    public string kapiTag = "Kapi"; 
+    public string npcTag = "NPC"; 
 
     private bool isSitting = false;
     private Vector3 standPosition;
@@ -34,23 +38,35 @@ public class SimpleFPSController : MonoBehaviour
     private Vector3 velocity;
     private Vector3 cameraDefaultLocalPos;
     private float timer = 0f;
+    private bool kadinaBakildiMi = false;
+
+    void Awake()
+    {
+        if(eButtonUI != null) eButtonUI.SetActive(false);
+        if(noktaImleci != null) noktaImleci.SetActive(false);
+    }
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
         anim = GetComponentInChildren<Animator>(); 
         Cursor.lockState = CursorLockMode.Locked;
-        
         if (playerCamera == null) playerCamera = Camera.main.transform;
-        
         cameraDefaultLocalPos = playerCamera.localPosition;
         yRotation = transform.eulerAngles.y;
-        
-        if(eButtonUI != null) eButtonUI.SetActive(false);
     }
 
     void Update()
     {
+        // OYUN DURDUYSA HER ŞEYİ KAPAT VE ÇIK
+        if (Time.timeScale == 0f) 
+        {
+            // Bu iki satır E harfinin menüde kalmasını engeller
+            if (eButtonUI != null && eButtonUI.activeSelf) eButtonUI.SetActive(false);
+            if (noktaImleci != null && noktaImleci.activeSelf) noktaImleci.SetActive(false);
+            return; 
+        }
+
         if (isSitting)
         {
             transform.position = sofaSitPoint.position + new Vector3(0, sitHeightOffset, 0);
@@ -63,22 +79,23 @@ public class SimpleFPSController : MonoBehaviour
         HandleInteraction();
     }
 
-    void LateUpdate() { HandleRotationAndCamera(); }
+    void LateUpdate() 
+    { 
+        if (Time.timeScale == 0f) return; 
+        HandleRotationAndCamera(); 
+    }
 
     void HandleMovement()
     {
         if (controller == null || !controller.enabled || isSitting) return;
-
+        
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
-
         Vector3 move = transform.right * x + transform.forward * z;
         if (move.magnitude > 1) move.Normalize();
-
         controller.Move(move * moveSpeed * Time.deltaTime);
-
-        if (controller.isGrounded && velocity.y < 0) velocity.y = -2f;
         
+        if (controller.isGrounded && velocity.y < 0) velocity.y = -2f;
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
     }
@@ -87,7 +104,6 @@ public class SimpleFPSController : MonoBehaviour
     {
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
-
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -80f, 80f);
         yRotation += mouseX;
@@ -112,18 +128,18 @@ public class SimpleFPSController : MonoBehaviour
         float inputZ = Input.GetAxisRaw("Vertical");
         float inputX = Input.GetAxisRaw("Horizontal");
         bool isBlocked = false;
-
+        
         if (Mathf.Abs(inputZ) > 0.1f || Mathf.Abs(inputX) > 0.1f)
         {
             Vector3 moveDir = (transform.right * inputX + transform.forward * inputZ).normalized;
             RaycastHit hit;
             if (Physics.Raycast(transform.position + Vector3.up * 0.4f, moveDir, out hit, 0.8f))
             {
-                if (!hit.collider.CompareTag("SitTarget") && !hit.collider.CompareTag(radioTag)) 
+                if (!hit.collider.CompareTag("SitTarget") && !hit.collider.CompareTag(radioTag) && !hit.collider.CompareTag(kapiTag)) 
                     isBlocked = true;
             }
         }
-
+        
         if (anim != null) 
         {
             anim.SetFloat("Vertical", isBlocked ? 0f : inputZ);
@@ -136,76 +152,70 @@ public class SimpleFPSController : MonoBehaviour
         float inputZ = Input.GetAxisRaw("Vertical");
         bool isMoving = (inputZ != 0 || Input.GetAxisRaw("Horizontal") != 0);
         Vector3 targetPos = cameraDefaultLocalPos;
-
-        if (isMoving) 
-        {
-            timer += Time.deltaTime * walkSwaySpeed;
-            targetPos.y += Mathf.Sin(timer) * walkSwayAmount;
-        } 
-        else 
-        {
-            timer += Time.deltaTime * idleSwaySpeed;
-            targetPos.y += Mathf.Sin(timer) * idleSwayAmount;
-        }
+        
+        if (isMoving) { timer += Time.deltaTime * walkSwaySpeed; targetPos.y += Mathf.Sin(timer) * walkSwayAmount; } 
+        else { timer += Time.deltaTime * idleSwaySpeed; targetPos.y += Mathf.Sin(timer) * idleSwayAmount; }
+        
         playerCamera.localPosition = Vector3.Lerp(playerCamera.localPosition, targetPos, swaySmoothing);
     }
 
     void HandleInteraction()
     {
+        // Burada da her ihtimale karşı kontrol ediyoruz
+        if (Time.timeScale == 0f) return;
+
         RaycastHit hit;
-        
-        // Işını görselleştirelim (Sadece Scene ekranında görünür)
-        Debug.DrawRay(playerCamera.position, playerCamera.forward * interactDistance, Color.red);
+        bool bakilanKapiMi = false;
+        bool bakilanDigerEtkilesimMi = false;
 
-        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, interactDistance))
+        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, npcBakmaMesafesi, ~LayerMask.GetMask("Ignore Raycast")))
         {
-            // KONSOLDA NEYE ÇARPTIĞINI GÖSTERİR (Sol alt köşeye bak!)
-            Debug.Log("Çarpan Obje: " + hit.collider.gameObject.name + " | Tag: " + hit.collider.tag);
-
-            if (hit.collider.CompareTag("SitTarget") || hit.collider.CompareTag(radioTag))
+            if (hit.collider.CompareTag(npcTag))
             {
-                if (eButtonUI != null) eButtonUI.SetActive(true);
-
-                if (Input.GetKeyDown(KeyCode.E)) 
+                if (!kadinaBakildiMi)
                 {
-                    if (hit.collider.CompareTag("SitTarget")) 
+                    AltyaziSistemi altyazi = FindObjectOfType<AltyaziSistemi>();
+                    if (altyazi != null)
                     {
-                        SitDown();
-                    }
-                    else if (hit.collider.CompareTag(radioTag))
-                    {
-                        RadioController rc = hit.collider.GetComponent<RadioController>();
-                        if(rc != null) rc.Interact();
-                        else Debug.LogWarning("RadioController scripti bu objede bulunamadı!");
+                        altyazi.AltyaziYaz("Baba - I'm home!");
+                        kadinaBakildiMi = true;
                     }
                 }
-            } 
-            else 
-            {
-                if (eButtonUI != null) eButtonUI.SetActive(false);
             }
-        } 
-        else 
-        {
-            if (eButtonUI != null) eButtonUI.SetActive(false);
+            
+            float mesafe = Vector3.Distance(playerCamera.position, hit.point);
+
+            if (mesafe <= interactDistance)
+            {
+                if (hit.collider.CompareTag(kapiTag))
+                {
+                    bakilanKapiMi = true;
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        KapiKontrol kk = hit.collider.GetComponentInParent<KapiKontrol>();
+                        if (kk != null) kk.KapiyiAcKapat();
+                    }
+                }
+                else if (hit.collider.CompareTag(radioTag) || hit.collider.CompareTag("SitTarget"))
+                {
+                    bakilanDigerEtkilesimMi = true;
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        if (hit.collider.CompareTag("SitTarget")) SitDown();
+                        else if (hit.collider.CompareTag(radioTag))
+                        {
+                            RadioController rc = hit.collider.GetComponent<RadioController>();
+                            if (rc != null) rc.Interact();
+                        }
+                    }
+                }
+            }
         }
+
+        if (noktaImleci != null) noktaImleci.SetActive(bakilanKapiMi);
+        if (eButtonUI != null) eButtonUI.SetActive(bakilanKapiMi || bakilanDigerEtkilesimMi);
     }
 
-    void SitDown()
-    {
-        standPosition = transform.position; 
-        isSitting = true; 
-        controller.enabled = false;
-        if (anim != null) anim.SetBool("IsSitting", true);
-        sittingCenterYaw = sofaSitPoint.eulerAngles.y;
-        yRotation = sittingCenterYaw;
-    }
-
-    void StandUp()
-    {
-        isSitting = false; 
-        controller.enabled = true;
-        transform.position = standPosition + Vector3.up * 0.1f;
-        if (anim != null) anim.SetBool("IsSitting", false);
-    }
+    void SitDown() { standPosition = transform.position; isSitting = true; controller.enabled = false; if (anim != null) anim.SetBool("IsSitting", true); sittingCenterYaw = sofaSitPoint.eulerAngles.y; yRotation = sittingCenterYaw; }
+    void StandUp() { isSitting = false; controller.enabled = true; transform.position = standPosition + Vector3.up * 0.1f; if (anim != null) anim.SetBool("IsSitting", false); }
 }
