@@ -18,6 +18,23 @@ MonoBehaviour:
     alwaysEnable: 0
     cameraTypes: 5
     skipTransparents: 0
+--- !u!114 &-5391895864264083950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d49ceeae970dfce4e9e021870908492b, type: 3}
+  m_Name: '[SCPE] TubeDistortionRenderer'
+  m_EditorClassIdentifier: sc.posteffects.runtime::SCPE.TubeDistortionRenderer
+  m_Active: 1
+  settings:
+    executionOrder: 0
+    alwaysEnable: 0
+    cameraTypes: 3
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46,6 +63,9 @@ MonoBehaviour:
   - {fileID: 7239520233702134405}
   - {fileID: 4929978940966323493}
   - {fileID: -7162276198195864037}
+  - {fileID: 6024342224910016407}
+  - {fileID: -5391895864264083950}
+  - {fileID: 4808086153837479930}
   m_RendererFeatureMap: 859211c24bf17764
   m_UseNativeRenderPass: 0
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -75,6 +95,23 @@ MonoBehaviour:
   m_DepthTextureFormat: 0
   m_AccurateGbufferNormals: 0
   m_IntermediateTextureMode: 1
+--- !u!114 &4808086153837479930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 039ea2c8d80d11f4aa1926e992d660b4, type: 3}
+  m_Name: '[SCPE] ColorSplitRenderer'
+  m_EditorClassIdentifier: sc.posteffects.runtime::SCPE.ColorSplitRenderer
+  m_Active: 1
+  settings:
+    executionOrder: 0
+    alwaysEnable: 0
+    cameraTypes: 5
 --- !u!114 &4929978940966323493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,6 +124,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8173f089832511149b44a215bb4a2f39, type: 3}
   m_Name: '[SCPE] DitheringRenderer'
   m_EditorClassIdentifier: sc.posteffects.runtime::SCPE.DitheringRenderer
+  m_Active: 1
+  settings:
+    executionOrder: 0
+    alwaysEnable: 0
+    cameraTypes: 5
+--- !u!114 &6024342224910016407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0f847b2f420ea54ba779e55bdc277ad, type: 3}
+  m_Name: '[SCPE] PixelizeRenderer'
+  m_EditorClassIdentifier: sc.posteffects.runtime::SCPE.PixelizeRenderer
   m_Active: 1
   settings:
     executionOrder: 0

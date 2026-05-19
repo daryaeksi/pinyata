@@ -11,6 +11,7 @@ TagManager:
   - NPC
   - Karakter
   - HedefNoktasi
+  - Pinyata
   layers:
   - Default
   - TransparentFX
@@ -18,8 +19,8 @@ TagManager:
   - Examine
   - Water
   - UI
-  - 
-  - 
+  - Distorted_Walls
+  - PinyataLayer
   - 
   - 
   - 

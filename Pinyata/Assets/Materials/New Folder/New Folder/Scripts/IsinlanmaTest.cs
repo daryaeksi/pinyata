@@ -10,11 +10,11 @@ public class IsinlanmaTesti : MonoBehaviour
 
     [Header("Atmosfer Ayarları")]
     public Material kirmiziGokyuzu;
-    public Material normalGokyuzu; // Normal gökyüzünü buraya koyacağız
+    public Material normalGokyuzu; 
     public Color sisRengi = new Color(0.5f, 0, 0);
     public float sisYogunlugu = 0.05f;
 
-    private bool oda2deyim = false; // Hangi odada olduğumuzu takip eder
+    private bool oda2deyim = false; 
     private bool isinlanmaBasladi = false;
 
     void Update()
@@ -29,10 +29,24 @@ public class IsinlanmaTesti : MonoBehaviour
     {
         isinlanmaBasladi = true;
 
+        // --- 1. FİZİĞİ GEÇİCİ OLARAK DURDUR ---
+        // Eğer karakterde CharacterController varsa kapatıyoruz ki sapıtmasın
+        CharacterController cc = oyuncu.GetComponent<CharacterController>();
+        if (cc != null) cc.enabled = false;
+
+        // Eğer karakterde Rigidbody varsa yerçekimini ve fiziği donduruyoruz
+        Rigidbody rb = oyuncu.GetComponent<Rigidbody>();
+        bool rbKinematicDurumu = false;
+        if (rb != null) 
+        {
+            rbKinematicDurumu = rb.isKinematic;
+            rb.isKinematic = true; // Karakteri %100 kodun kontrolüne (kinematik) alıyoruz
+        }
+
         // Gidilecek yönü belirle
         Vector3 odaFarki = oda2deyim ? (oda1Merkez.position - oda2Merkez.position) : (oda2Merkez.position - oda1Merkez.position);
 
-        // --- GLITCH EFEKTİ ---
+        // --- 2. GLITCH EFEKTİ ---
         for (int i = 0; i < 3; i++) 
         {
             oyuncu.position += odaFarki;
@@ -41,14 +55,16 @@ public class IsinlanmaTesti : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
 
-        // --- ASIL IŞINLANMA ---
-        oyuncu.position += odaFarki;
-        oda2deyim = !oda2deyim; // Odayı değiştir
+        // --- 3. ASIL IŞINLANMA VE YÜKSEKLİK AYARI ---
+        Vector3 sonKonum = oyuncu.position + odaFarki;
+        sonKonum.y += 0.5f; // Adamı zeminin içine saplanmasın diye hafif havadan bırakıyoruz
+        oyuncu.position = sonKonum;
+        
+        oda2deyim = !oda2deyim; 
 
-        // --- ATMOSFER GÜNCELLEME ---
+        // --- 4. ATMOSFER GÜNCELLEME ---
         if (oda2deyim)
         {
-            // İkinci (Kanlı) Oda Ayarları
             if (kirmiziGokyuzu != null) RenderSettings.skybox = kirmiziGokyuzu;
             RenderSettings.fog = true;
             RenderSettings.fogColor = sisRengi;
@@ -56,12 +72,17 @@ public class IsinlanmaTesti : MonoBehaviour
         }
         else
         {
-            // Birinci (Normal) Oda Ayarları
             if (normalGokyuzu != null) RenderSettings.skybox = normalGokyuzu;
-            RenderSettings.fog = false; // Sisi kapat
+            RenderSettings.fog = false; 
         }
 
         DynamicGI.UpdateEnvironment();
+
+        // --- 5. FİZİĞİ GERİ AÇ ---
+        // Işınlanma bittiği için kontrolleri karaktere geri veriyoruz
+        if (cc != null) cc.enabled = true;
+        if (rb != null) rb.isKinematic = rbKinematicDurumu;
+
         isinlanmaBasladi = false;
     }
 }

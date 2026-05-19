@@ -25,7 +25,6 @@ public class IntroStart : MonoBehaviour
         
         mainMenuPanel.SetActive(true);
         playerCharacter.SetActive(false);
-        mainCamera.SetActive(false);
         animCharacterIntro.SetActive(false);
         cutsceneCamera.SetActive(false);
     }

@@ -7,8 +7,9 @@ public class SimpleFPSController : MonoBehaviour
     public float mouseSensitivity = 2f;
     public float gravity = -9.81f;
 
-    [Header("Kamera ve Sallanma")]
+    [Header("Kamera ve Vucut Sallanma (Sway)")]
     public Transform playerCamera;
+    public Transform bodyVisuals; // <--- YENİ: Vücut modelinin kendisini buraya sürükleyeceğiz
     [Range(0, 1)] public float swaySmoothing = 0.15f;
     public float idleSwaySpeed = 1.5f;
     public float idleSwayAmount = 0.03f;
@@ -37,6 +38,7 @@ public class SimpleFPSController : MonoBehaviour
     private float sittingCenterYaw; 
     private Vector3 velocity;
     private Vector3 cameraDefaultLocalPos;
+    private Vector3 bodyDefaultLocalPos; // <--- YENİ: Vücudun ilk konumu
     private float timer = 0f;
     private bool kadinaBakildiMi = false;
 
@@ -52,16 +54,17 @@ public class SimpleFPSController : MonoBehaviour
         anim = GetComponentInChildren<Animator>(); 
         Cursor.lockState = CursorLockMode.Locked;
         if (playerCamera == null) playerCamera = Camera.main.transform;
+        
         cameraDefaultLocalPos = playerCamera.localPosition;
+        if (bodyVisuals != null) bodyDefaultLocalPos = bodyVisuals.localPosition; // Vücudun yerini kaydet
+
         yRotation = transform.eulerAngles.y;
     }
 
     void Update()
     {
-        // OYUN DURDUYSA HER ŞEYİ KAPAT VE ÇIK
         if (Time.timeScale == 0f) 
         {
-            // Bu iki satır E harfinin menüde kalmasını engeller
             if (eButtonUI != null && eButtonUI.activeSelf) eButtonUI.SetActive(false);
             if (noktaImleci != null && noktaImleci.activeSelf) noktaImleci.SetActive(false);
             return; 
@@ -151,17 +154,29 @@ public class SimpleFPSController : MonoBehaviour
     {
         float inputZ = Input.GetAxisRaw("Vertical");
         bool isMoving = (inputZ != 0 || Input.GetAxisRaw("Horizontal") != 0);
-        Vector3 targetPos = cameraDefaultLocalPos;
         
-        if (isMoving) { timer += Time.deltaTime * walkSwaySpeed; targetPos.y += Mathf.Sin(timer) * walkSwayAmount; } 
-        else { timer += Time.deltaTime * idleSwaySpeed; targetPos.y += Mathf.Sin(timer) * idleSwayAmount; }
+        float swayAmount = isMoving ? walkSwayAmount : idleSwayAmount;
+        float swaySpeed = isMoving ? walkSwaySpeed : idleSwaySpeed;
         
-        playerCamera.localPosition = Vector3.Lerp(playerCamera.localPosition, targetPos, swaySmoothing);
+        timer += Time.deltaTime * swaySpeed;
+        float waveOffset = Mathf.Sin(timer) * swayAmount;
+
+        // Kameraya Uygula
+        Vector3 targetCamPos = cameraDefaultLocalPos;
+        targetCamPos.y += waveOffset;
+        playerCamera.localPosition = Vector3.Lerp(playerCamera.localPosition, targetCamPos, swaySmoothing);
+
+        // Vücuda da Uygula (Yeni Kısım)
+        if (bodyVisuals != null)
+        {
+            Vector3 targetBodyPos = bodyDefaultLocalPos;
+            targetBodyPos.y += waveOffset; // Eğer ters yönde hareket etmesini istersen bunu "-=" yapabilirsin
+            bodyVisuals.localPosition = Vector3.Lerp(bodyVisuals.localPosition, targetBodyPos, swaySmoothing);
+        }
     }
 
     void HandleInteraction()
     {
-        // Burada da her ihtimale karşı kontrol ediyoruz
         if (Time.timeScale == 0f) return;
 
         RaycastHit hit;
