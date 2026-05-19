@@ -1,5 +1,43 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8006662438558236640
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aca6b5f0da8ca64cb69109b860c1891, type: 3}
+  m_Name: LightStreaks
+  m_EditorClassIdentifier: sc.posteffects.runtime::SCPE.LightStreaks
+  active: 0
+  quality:
+    m_OverrideState: 0
+    m_Value: 1
+  debug:
+    m_OverrideState: 0
+    m_Value: 0
+  intensity:
+    m_OverrideState: 1
+    m_Value: 0.056
+  luminanceThreshold:
+    m_OverrideState: 0
+    m_Value: 1
+  direction:
+    m_OverrideState: 0
+    m_Value: -1
+  blur:
+    m_OverrideState: 0
+    m_Value: 1
+  iterations:
+    m_OverrideState: 0
+    m_Value: 2
+  downscaling:
+    m_OverrideState: 0
+    m_Value: 2
+  shader: {fileID: 0}
 --- !u!114 &-7667982559831779333
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -14,8 +52,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.LensDistortion
   active: 1
   intensity:
-    m_OverrideState: 1
-    m_Value: 0.08
+    m_OverrideState: 0
+    m_Value: -0.22
   xMultiplier:
     m_OverrideState: 1
     m_Value: 1
@@ -75,7 +113,7 @@ MonoBehaviour:
     m_Value: 8
   intensity:
     m_OverrideState: 1
-    m_Value: 0.32
+    m_Value: 0.28
   response:
     m_OverrideState: 0
     m_Value: 0.8
@@ -131,6 +169,8 @@ MonoBehaviour:
   - {fileID: -6214543364178908460}
   - {fileID: 6938479768034081381}
   - {fileID: 6323874268611523993}
+  - {fileID: 4823940081567471247}
+  - {fileID: -8006662438558236640}
 --- !u!114 &750490870895690786
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -146,19 +186,62 @@ MonoBehaviour:
   active: 1
   postExposure:
     m_OverrideState: 1
-    m_Value: -0.8
+    m_Value: -1
   contrast:
     m_OverrideState: 1
-    m_Value: 66
+    m_Value: 49
   colorFilter:
-    m_OverrideState: 0
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
+    m_OverrideState: 1
+    m_Value: {r: 0.9150943, g: 0.5384916, b: 0.51366144, a: 1}
   hueShift:
     m_OverrideState: 0
     m_Value: 0
   saturation:
     m_OverrideState: 1
-    m_Value: -4
+    m_Value: -14
+--- !u!114 &4823940081567471247
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32eb3b8fb939d9b41b04b5621e6d36dd, type: 3}
+  m_Name: Fog
+  m_EditorClassIdentifier: Assembly-CSharp::PSX.Fog
+  active: 1
+  fogDensity:
+    m_OverrideState: 1
+    m_Value: 1
+  fogDistance:
+    m_OverrideState: 1
+    m_Value: 10
+  fogColor:
+    m_OverrideState: 1
+    m_Value: {r: 0, g: 0, b: 0, a: 1}
+  ambientColor:
+    m_OverrideState: 0
+    m_Value: {r: 0.1, g: 0.1, b: 0.1, a: 0.1}
+  fogNear:
+    m_OverrideState: 0
+    m_Value: 1
+  fogFar:
+    m_OverrideState: 0
+    m_Value: 100
+  fogAltScale:
+    m_OverrideState: 0
+    m_Value: 10
+  fogThinning:
+    m_OverrideState: 0
+    m_Value: 100
+  noiseScale:
+    m_OverrideState: 0
+    m_Value: 100
+  noiseStrength:
+    m_OverrideState: 0
+    m_Value: 0.05
 --- !u!114 &5616586262328268976
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -174,7 +257,7 @@ MonoBehaviour:
   active: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0.259
 --- !u!114 &6323874268611523993
 MonoBehaviour:
   m_ObjectHideFlags: 3

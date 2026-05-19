@@ -17,8 +17,8 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 0
   contrast:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 59
   colorFilter:
     m_OverrideState: 1
     m_Value: {r: 0.6966447, g: 0.9528302, b: 0.7098822, a: 1}
@@ -44,6 +44,7 @@ MonoBehaviour:
   - {fileID: 2399676419536997569}
   - {fileID: 7387573416323330008}
   - {fileID: -1392195268245133410}
+  - {fileID: 8021320853537996021}
 --- !u!114 &2399676419536997569
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -56,7 +57,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5e1dc532bcb41949b58bc4f2abfbb7e, type: 3}
   m_Name: LensDistortion
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.LensDistortion
-  active: 1
+  active: 0
   intensity:
     m_OverrideState: 1
     m_Value: 0.23
@@ -87,4 +88,47 @@ MonoBehaviour:
   active: 1
   intensity:
     m_OverrideState: 1
+    m_Value: 0.245
+--- !u!114 &8021320853537996021
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32eb3b8fb939d9b41b04b5621e6d36dd, type: 3}
+  m_Name: Fog
+  m_EditorClassIdentifier: Assembly-CSharp::PSX.Fog
+  active: 1
+  fogDensity:
+    m_OverrideState: 1
+    m_Value: 100000000
+  fogDistance:
+    m_OverrideState: 1
+    m_Value: 10
+  fogColor:
+    m_OverrideState: 1
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
+  ambientColor:
+    m_OverrideState: 1
+    m_Value: {r: 0.1, g: 0.1, b: 0.1, a: 0.1}
+  fogNear:
+    m_OverrideState: 1
     m_Value: 1
+  fogFar:
+    m_OverrideState: 1
+    m_Value: 100
+  fogAltScale:
+    m_OverrideState: 0
+    m_Value: 10
+  fogThinning:
+    m_OverrideState: 1
+    m_Value: 100
+  noiseScale:
+    m_OverrideState: 0
+    m_Value: 100
+  noiseStrength:
+    m_OverrideState: 0
+    m_Value: 0.05
