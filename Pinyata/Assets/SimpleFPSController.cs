@@ -30,11 +30,14 @@ public class SimpleFPSController : MonoBehaviour
     public string kapiTag = "Kapi"; 
     public string npcTag = "NPC"; 
 
-    // <--- YENİ: IŞINLANMA VE YAVAŞ ODA AYARLARI --->
     [Header("Gizli Oda Ayarlari")]
-    public Transform gizliOdaNoktasi; // T'ye basınca gidilecek yer
-    public float yavasOdaHizi = 1.5f; // Odadaki yavaş yürüme hızı
-    private float normalHareketHizi; // Normal hızı hafızada tutmak için
+    public Transform gizliOdaNoktasi; 
+    public float yavasOdaHizi = 1.5f; 
+    
+    // <--- YENİ: Kamerayı kontrol edebilmen için açtığımız ayarlar --->
+    public float slowRoomCameraZOffset = 0.15f; // Kamerayı ne kadar ileri alacak
+
+    private float normalHareketHizi; 
     private bool gizliOdadaMi = false; 
 
     private bool isSitting = false;
@@ -50,6 +53,10 @@ public class SimpleFPSController : MonoBehaviour
     private float timer = 0f;
     private bool kadinaBakildiMi = false;
 
+    // Kamera Clip ayarlarını hafızada tutacak değişkenler
+    private Camera camComponent;
+    private float orijinalNearClip;
+
     void Awake()
     {
         if(eButtonUI != null) eButtonUI.SetActive(false);
@@ -63,19 +70,23 @@ public class SimpleFPSController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         if (playerCamera == null) playerCamera = Camera.main.transform;
         
+        camComponent = playerCamera.GetComponent<Camera>();
+        if (camComponent != null) 
+        {
+            orijinalNearClip = camComponent.nearClipPlane;
+        }
+
         cameraDefaultLocalPos = playerCamera.localPosition;
         if (bodyVisuals != null) bodyDefaultLocalPos = bodyVisuals.localPosition; 
 
         yRotation = transform.eulerAngles.y;
-        
-        // Normal hızı oyun başlarken hafızaya alıyoruz
         normalHareketHizi = moveSpeed;
 
         if (anim != null) 
         {
             anim.SetBool("IsSitting", false);
             anim.SetBool("IsWalking", false);
-            anim.SetBool("IsSlowRoom", false); // Başlangıçta normal odadayız
+            anim.SetBool("IsSlowRoom", false); 
         }
     }
 
@@ -88,7 +99,6 @@ public class SimpleFPSController : MonoBehaviour
             return; 
         }
 
-        // <--- YENİ: T TUŞU İLE IŞINLANMA KONTROLÜ --->
         if (Input.GetKeyDown(KeyCode.T) && !isSitting)
         {
             TeleportToSecretRoom();
@@ -126,7 +136,6 @@ public class SimpleFPSController : MonoBehaviour
         HandleRotationAndCamera(); 
     }
 
-    // <--- YENİ: IŞINLANMA VE DURUM DEĞİŞTİRME FONKSİYONU --->
     void TeleportToSecretRoom()
     {
         if (gizliOdaNoktasi == null) 
@@ -135,27 +144,23 @@ public class SimpleFPSController : MonoBehaviour
             return;
         }
 
-        // Durumu tersine çevir (T'ye tekrar basarsan iptal olur mantığı için)
         gizliOdadaMi = !gizliOdadaMi;
-
-        // Unity'de ışınlanma yaparken CharacterController'ı anlık kapatmak zorundayız
         controller.enabled = false;
         
         if (gizliOdadaMi)
         {
-            transform.position = gizliOdaNoktasi.position; // Işınla
-            moveSpeed = yavasOdaHizi; // Hızı düşür
+            transform.position = gizliOdaNoktasi.position; 
+            moveSpeed = yavasOdaHizi; 
+            if (camComponent != null) camComponent.nearClipPlane = 0.01f;
         }
         else
         {
-            // İstersen T'ye tekrar basınca eski yerine dönmesini sağlayabilirsin
-            // Şimdilik sadece hızı ve animasyonu normale döndürüyor
             moveSpeed = normalHareketHizi; 
+            if (camComponent != null) camComponent.nearClipPlane = orijinalNearClip;
         }
         
         controller.enabled = true;
 
-        // Animator'a yeni odaya girdiğimizi (veya çıktığımızı) haber veriyoruz
         if (anim != null)
         {
             anim.SetBool("IsSlowRoom", gizliOdadaMi);
@@ -238,6 +243,14 @@ public class SimpleFPSController : MonoBehaviour
         float waveOffset = Mathf.Sin(timer) * swayAmount;
 
         Vector3 targetCamPos = cameraDefaultLocalPos;
+        
+        // <--- DEĞİŞTİRDİĞİMİZ KISIM BURASI --->
+        // Eğer gizli odadaysak, Inspector'dan verdiğin değer kadar kamerayı öne alıyoruz
+        if (gizliOdadaMi)
+        {
+            targetCamPos.z += slowRoomCameraZOffset;
+        }
+
         targetCamPos.y += waveOffset;
         playerCamera.localPosition = Vector3.Lerp(playerCamera.localPosition, targetCamPos, swaySmoothing);
 
