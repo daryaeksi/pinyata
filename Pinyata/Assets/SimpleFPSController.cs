@@ -145,7 +145,22 @@ public class SimpleFPSController : MonoBehaviour
         if (camComponent != null)
             camComponent.nearClipPlane = gizliOdadaMi ? 0.01f : orijinalNearClip;
         if (anim != null)
+        {
             anim.SetBool("IsSlowRoom", gizliOdadaMi);
+            anim.SetBool("IsWalking", false);
+            StartCoroutine(RestoreWalkingState());
+        }
+    }
+
+    private System.Collections.IEnumerator RestoreWalkingState()
+    {
+        yield return null;
+        if (anim != null)
+        {
+            float x = Input.GetAxisRaw("Horizontal");
+            float z = Input.GetAxisRaw("Vertical");
+            anim.SetBool("IsWalking", (x != 0 || z != 0));
+        }
     }
 
     void TeleportToSecretRoom()
