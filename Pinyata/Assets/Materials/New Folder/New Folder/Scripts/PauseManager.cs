@@ -11,6 +11,7 @@ public class PauseManager : MonoBehaviour
     public GameObject mainMenuContent;  
     public GameObject optionsContent;   
     public GameObject controlsContent;  
+    public GameObject quitContent;      // YENİ: Çıkış menüsü paneli
 
     void Start()
     {
@@ -64,7 +65,7 @@ public class PauseManager : MonoBehaviour
     void Pause()
     {
         pauseMenuRoot.SetActive(true);
-        ShowMainMenu();
+        ShowMainMenu(); // Duraklatılınca her zaman Ana Menüyü gösterir
         Time.timeScale = 0f;
         isPaused = true;
         
@@ -78,16 +79,20 @@ public class PauseManager : MonoBehaviour
         mainMenuContent.SetActive(true);
         optionsContent.SetActive(false);
         controlsContent.SetActive(false);
+        quitContent.SetActive(false); // YENİ: Ana menüye dönünce çıkış ekranını da gizle
     }
 
     public void OpenOptions() { SetPanel(optionsContent); }
     public void OpenControls() { SetPanel(controlsContent); }
+    public void OpenQuit() { SetPanel(quitContent); } // YENİ: Çıkış menüsünü açan fonksiyon
 
     private void SetPanel(GameObject panelToOpen)
     {
         mainMenuContent.SetActive(false);
         optionsContent.SetActive(false);
         controlsContent.SetActive(false);
+        quitContent.SetActive(false); // YENİ: Başka panel açılırken çıkış ekranını da gizle
+        
         panelToOpen.SetActive(true);
     }
 
