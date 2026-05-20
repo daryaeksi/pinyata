@@ -9,7 +9,7 @@ public class SimpleFPSController : MonoBehaviour
 
     [Header("Kamera ve Vucut Sallanma (Sway)")]
     public Transform playerCamera;
-    public Transform bodyVisuals; // <--- YENİ: Vücut modelinin kendisini buraya sürükleyeceğiz
+    public Transform bodyVisuals; 
     [Range(0, 1)] public float swaySmoothing = 0.15f;
     public float idleSwaySpeed = 1.5f;
     public float idleSwayAmount = 0.03f;
@@ -24,6 +24,10 @@ public class SimpleFPSController : MonoBehaviour
     public float npcBakmaMesafesi = 10f; 
     public float sitHeightOffset = -0.6f; 
     public float sittingCameraHeight = 0.6f; 
+    
+    // <--- YENİ: Otururken kamerayı ileri/geri almak için değişken
+    public float sittingCameraForwardOffset = 0.2f; 
+    
     public float sittingYawLimit = 60f; 
     public string radioTag = "Radio"; 
     public string kapiTag = "Kapi"; 
@@ -38,7 +42,7 @@ public class SimpleFPSController : MonoBehaviour
     private float sittingCenterYaw; 
     private Vector3 velocity;
     private Vector3 cameraDefaultLocalPos;
-    private Vector3 bodyDefaultLocalPos; // <--- YENİ: Vücudun ilk konumu
+    private Vector3 bodyDefaultLocalPos; 
     private float timer = 0f;
     private bool kadinaBakildiMi = false;
 
@@ -56,7 +60,7 @@ public class SimpleFPSController : MonoBehaviour
         if (playerCamera == null) playerCamera = Camera.main.transform;
         
         cameraDefaultLocalPos = playerCamera.localPosition;
-        if (bodyVisuals != null) bodyDefaultLocalPos = bodyVisuals.localPosition; // Vücudun yerini kaydet
+        if (bodyVisuals != null) bodyDefaultLocalPos = bodyVisuals.localPosition; 
 
         yRotation = transform.eulerAngles.y;
     }
@@ -114,7 +118,12 @@ public class SimpleFPSController : MonoBehaviour
         if (isSitting)
         {
             yRotation = Mathf.Clamp(yRotation, sittingCenterYaw - sittingYawLimit, sittingCenterYaw + sittingYawLimit);
-            playerCamera.position = transform.position + new Vector3(0, sittingCameraHeight, 0);
+            
+            // <--- YENİ: transform.forward kullanarak kamerayı karakterin baktığı yönde ileri/geri itiyoruz
+            playerCamera.position = transform.position 
+                                  + new Vector3(0, sittingCameraHeight, 0) 
+                                  + (transform.forward * sittingCameraForwardOffset);
+            
             playerCamera.localRotation = Quaternion.Euler(xRotation, yRotation - sittingCenterYaw, 0f);
         }
         else
@@ -161,16 +170,14 @@ public class SimpleFPSController : MonoBehaviour
         timer += Time.deltaTime * swaySpeed;
         float waveOffset = Mathf.Sin(timer) * swayAmount;
 
-        // Kameraya Uygula
         Vector3 targetCamPos = cameraDefaultLocalPos;
         targetCamPos.y += waveOffset;
         playerCamera.localPosition = Vector3.Lerp(playerCamera.localPosition, targetCamPos, swaySmoothing);
 
-        // Vücuda da Uygula (Yeni Kısım)
         if (bodyVisuals != null)
         {
             Vector3 targetBodyPos = bodyDefaultLocalPos;
-            targetBodyPos.y += waveOffset; // Eğer ters yönde hareket etmesini istersen bunu "-=" yapabilirsin
+            targetBodyPos.y += waveOffset; 
             bodyVisuals.localPosition = Vector3.Lerp(bodyVisuals.localPosition, targetBodyPos, swaySmoothing);
         }
     }
