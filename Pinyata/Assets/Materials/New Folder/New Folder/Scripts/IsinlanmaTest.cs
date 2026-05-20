@@ -60,7 +60,11 @@ public class IsinlanmaTesti : MonoBehaviour
         sonKonum.y += 0.5f; // Adamı zeminin içine saplanmasın diye hafif havadan bırakıyoruz
         oyuncu.position = sonKonum;
         
-        oda2deyim = !oda2deyim; 
+        oda2deyim = !oda2deyim;
+
+        SimpleFPSController fpsController = oyuncu.GetComponent<SimpleFPSController>();
+        if (fpsController != null)
+            fpsController.OnRoomChanged(oda2deyim);
 
         // --- 4. ATMOSFER GÜNCELLEME ---
         if (oda2deyim)

@@ -31,7 +31,8 @@ public class SimpleFPSController : MonoBehaviour
     public string npcTag = "NPC"; 
 
     [Header("Gizli Oda Ayarlari")]
-    public Transform gizliOdaNoktasi; 
+    public Transform normalOdaNoktasi;
+    public Transform gizliOdaNoktasi;
     public float yavasOdaHizi = 1.5f; 
     
     // <--- YENİ: Kamerayı kontrol edebilmen için açtığımız ayarlar --->
@@ -101,7 +102,7 @@ public class SimpleFPSController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.T) && !isSitting)
         {
-            TeleportToSecretRoom();
+            // Teleport is handled by IsinlanmaTesti
         }
 
         if (isSitting)
@@ -136,29 +137,44 @@ public class SimpleFPSController : MonoBehaviour
         HandleRotationAndCamera(); 
     }
 
+    /// <summary>Called by IsinlanmaTesti after teleport to sync speed, camera clip and animator state.</summary>
+    public void OnRoomChanged(bool isInSecretRoom)
+    {
+        gizliOdadaMi = isInSecretRoom;
+        moveSpeed = gizliOdadaMi ? yavasOdaHizi : normalHareketHizi;
+        if (camComponent != null)
+            camComponent.nearClipPlane = gizliOdadaMi ? 0.01f : orijinalNearClip;
+        if (anim != null)
+            anim.SetBool("IsSlowRoom", gizliOdadaMi);
+    }
+
     void TeleportToSecretRoom()
     {
-        if (gizliOdaNoktasi == null) 
+        if (normalOdaNoktasi == null || gizliOdaNoktasi == null)
         {
-            Debug.LogWarning("Gizli oda noktasi (Transform) Inspector'da atanmamis!");
+            Debug.LogWarning("Normal oda veya gizli oda noktasi Inspector'da atanmamis!");
             return;
         }
 
         gizliOdadaMi = !gizliOdadaMi;
         controller.enabled = false;
-        
+
         if (gizliOdadaMi)
         {
-            transform.position = gizliOdaNoktasi.position; 
-            moveSpeed = yavasOdaHizi; 
+            Vector3 offset = transform.position - normalOdaNoktasi.position;
+            transform.position = gizliOdaNoktasi.position + offset;
+            moveSpeed = yavasOdaHizi;
             if (camComponent != null) camComponent.nearClipPlane = 0.01f;
         }
         else
         {
-            moveSpeed = normalHareketHizi; 
+            Vector3 offset = transform.position - gizliOdaNoktasi.position;
+            transform.position = normalOdaNoktasi.position + offset;
+            moveSpeed = normalHareketHizi;
             if (camComponent != null) camComponent.nearClipPlane = orijinalNearClip;
         }
-        
+
+        velocity = Vector3.zero;
         controller.enabled = true;
 
         if (anim != null)

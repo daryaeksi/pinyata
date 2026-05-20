@@ -16064,7 +16064,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8eef4b102fa74420b8c92b9f7846cf4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.152
+      value: -4.115
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8eef4b102fa74420b8c92b9f7846cf4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -37726,6 +37726,7 @@ MonoBehaviour:
   radioTag: Radio
   kapiTag: Kapi
   npcTag: Karakter
+  normalOdaNoktasi: {fileID: 1191461920}
   gizliOdaNoktasi: {fileID: 38031710}
   yavasOdaHizi: 1.5
   slowRoomCameraZOffset: 0.33
