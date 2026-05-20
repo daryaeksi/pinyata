@@ -24,14 +24,18 @@ public class SimpleFPSController : MonoBehaviour
     public float npcBakmaMesafesi = 10f; 
     public float sitHeightOffset = -0.6f; 
     public float sittingCameraHeight = 0.6f; 
-    
-    // <--- YENİ: Otururken kamerayı ileri/geri almak için değişken
     public float sittingCameraForwardOffset = 0.2f; 
-    
     public float sittingYawLimit = 60f; 
     public string radioTag = "Radio"; 
     public string kapiTag = "Kapi"; 
     public string npcTag = "NPC"; 
+
+    // <--- YENİ: IŞINLANMA VE YAVAŞ ODA AYARLARI --->
+    [Header("Gizli Oda Ayarlari")]
+    public Transform gizliOdaNoktasi; // T'ye basınca gidilecek yer
+    public float yavasOdaHizi = 1.5f; // Odadaki yavaş yürüme hızı
+    private float normalHareketHizi; // Normal hızı hafızada tutmak için
+    private bool gizliOdadaMi = false; 
 
     private bool isSitting = false;
     private Vector3 standPosition;
@@ -63,6 +67,16 @@ public class SimpleFPSController : MonoBehaviour
         if (bodyVisuals != null) bodyDefaultLocalPos = bodyVisuals.localPosition; 
 
         yRotation = transform.eulerAngles.y;
+        
+        // Normal hızı oyun başlarken hafızaya alıyoruz
+        normalHareketHizi = moveSpeed;
+
+        if (anim != null) 
+        {
+            anim.SetBool("IsSitting", false);
+            anim.SetBool("IsWalking", false);
+            anim.SetBool("IsSlowRoom", false); // Başlangıçta normal odadayız
+        }
     }
 
     void Update()
@@ -74,12 +88,32 @@ public class SimpleFPSController : MonoBehaviour
             return; 
         }
 
+        // <--- YENİ: T TUŞU İLE IŞINLANMA KONTROLÜ --->
+        if (Input.GetKeyDown(KeyCode.T) && !isSitting)
+        {
+            TeleportToSecretRoom();
+        }
+
         if (isSitting)
         {
             transform.position = sofaSitPoint.position + new Vector3(0, sitHeightOffset, 0);
             transform.rotation = Quaternion.Euler(0f, sofaSitPoint.eulerAngles.y, 0f);
+
+            float ayarHizi = 0.5f; 
+            if (Input.GetKey(KeyCode.UpArrow)) sittingCameraHeight += ayarHizi * Time.deltaTime;
+            if (Input.GetKey(KeyCode.DownArrow)) sittingCameraHeight -= ayarHizi * Time.deltaTime;
+            if (Input.GetKey(KeyCode.RightArrow)) sittingCameraForwardOffset += ayarHizi * Time.deltaTime;
+            if (Input.GetKey(KeyCode.LeftArrow)) sittingCameraForwardOffset -= ayarHizi * Time.deltaTime;
+
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                Debug.Log($"<color=green><b>[KAMERA AYARI BULUNDU]</b></color> Inspector'a girilecek değerler -> " +
+                          $"<b>Sitting Camera Height:</b> {sittingCameraHeight:F3} | " +
+                          $"<b>Sitting Camera Forward Offset:</b> {sittingCameraForwardOffset:F3}");
+            }
+
             if (Input.GetKeyDown(KeyCode.E)) StandUp();
-            return;
+            return; 
         }
 
         HandleMovement();
@@ -90,6 +124,42 @@ public class SimpleFPSController : MonoBehaviour
     { 
         if (Time.timeScale == 0f) return; 
         HandleRotationAndCamera(); 
+    }
+
+    // <--- YENİ: IŞINLANMA VE DURUM DEĞİŞTİRME FONKSİYONU --->
+    void TeleportToSecretRoom()
+    {
+        if (gizliOdaNoktasi == null) 
+        {
+            Debug.LogWarning("Gizli oda noktasi (Transform) Inspector'da atanmamis!");
+            return;
+        }
+
+        // Durumu tersine çevir (T'ye tekrar basarsan iptal olur mantığı için)
+        gizliOdadaMi = !gizliOdadaMi;
+
+        // Unity'de ışınlanma yaparken CharacterController'ı anlık kapatmak zorundayız
+        controller.enabled = false;
+        
+        if (gizliOdadaMi)
+        {
+            transform.position = gizliOdaNoktasi.position; // Işınla
+            moveSpeed = yavasOdaHizi; // Hızı düşür
+        }
+        else
+        {
+            // İstersen T'ye tekrar basınca eski yerine dönmesini sağlayabilirsin
+            // Şimdilik sadece hızı ve animasyonu normale döndürüyor
+            moveSpeed = normalHareketHizi; 
+        }
+        
+        controller.enabled = true;
+
+        // Animator'a yeni odaya girdiğimizi (veya çıktığımızı) haber veriyoruz
+        if (anim != null)
+        {
+            anim.SetBool("IsSlowRoom", gizliOdadaMi);
+        }
     }
 
     void HandleMovement()
@@ -118,12 +188,9 @@ public class SimpleFPSController : MonoBehaviour
         if (isSitting)
         {
             yRotation = Mathf.Clamp(yRotation, sittingCenterYaw - sittingYawLimit, sittingCenterYaw + sittingYawLimit);
-            
-            // <--- YENİ: transform.forward kullanarak kamerayı karakterin baktığı yönde ileri/geri itiyoruz
             playerCamera.position = transform.position 
                                   + new Vector3(0, sittingCameraHeight, 0) 
                                   + (transform.forward * sittingCameraForwardOffset);
-            
             playerCamera.localRotation = Quaternion.Euler(xRotation, yRotation - sittingCenterYaw, 0f);
         }
         else
@@ -238,6 +305,31 @@ public class SimpleFPSController : MonoBehaviour
         if (eButtonUI != null) eButtonUI.SetActive(bakilanKapiMi || bakilanDigerEtkilesimMi);
     }
 
-    void SitDown() { standPosition = transform.position; isSitting = true; controller.enabled = false; if (anim != null) anim.SetBool("IsSitting", true); sittingCenterYaw = sofaSitPoint.eulerAngles.y; yRotation = sittingCenterYaw; }
-    void StandUp() { isSitting = false; controller.enabled = true; transform.position = standPosition + Vector3.up * 0.1f; if (anim != null) anim.SetBool("IsSitting", false); }
+    void SitDown() 
+    { 
+        standPosition = transform.position; 
+        isSitting = true; 
+        controller.enabled = false; 
+
+        if (anim != null) 
+        {
+            anim.SetBool("IsWalking", false); 
+            anim.SetBool("IsSitting", true);
+        } 
+
+        sittingCenterYaw = sofaSitPoint.eulerAngles.y; 
+        yRotation = sittingCenterYaw; 
+    }
+
+    void StandUp() 
+    { 
+        isSitting = false; 
+        controller.enabled = true; 
+        transform.position = standPosition + Vector3.up * 0.1f; 
+
+        if (anim != null) 
+        {
+            anim.SetBool("IsSitting", false);
+        } 
+    }
 }
