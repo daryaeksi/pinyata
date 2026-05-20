@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class PauseManager : MonoBehaviour
 {
     public static bool isPaused = false;
-    public static bool gameStarted = false; // Oyunun başlayıp başlamadığını tutar
+    public static bool gameStarted = false; // Oyun başlayana kadar ESC çalışmasın
 
     [Header("UI Panels")]
     public GameObject pauseMenuRoot;     
@@ -14,20 +14,21 @@ public class PauseManager : MonoBehaviour
 
     void Start()
     {
-        // Sahne her yüklendiğinde (Quit sonrası dahil) her şeyi sıfırla
+        // Oyun ilk açıldığında Ana Menüdeyiz. Zaman akıyor, ESC kapalı, FARE GÖRÜNÜR.
         Time.timeScale = 1f;
         isPaused = false;
-        gameStarted = false; // Başlangıçta ESC çalışmasın diye false yapıyoruz
+        gameStarted = false; 
         
         if(pauseMenuRoot != null) pauseMenuRoot.SetActive(false);
         
+        // Fareyi görünür yap (New Game butonuna basabilmek için)
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
 
     void Update()
     {
-        // SADECE oyun başladıysa ESC tuşu çalışsın
+        // SADECE gameStarted "true" olduktan sonra ESC çalışacak
         if (gameStarted && Input.GetKeyDown(KeyCode.Escape))
         {
             if (isPaused) Resume();
@@ -35,11 +36,18 @@ public class PauseManager : MonoBehaviour
         }
     }
 
-    // BU FONKSİYONU NEW GAME BUTONUNA BAĞLAYACAĞIZ
+    // BU FONKSİYONU UNITY'DE "NEW GAME" BUTONUNA BAĞLAMALISIN
     public void StartGame()
     {
-        gameStarted = true;
-        Debug.Log("Oyun başladı, artık ESC ile Pause açılabilir.");
+        gameStarted = true; // Artık ESC tuşu çalışabilir
+        
+        // Sinematik izlerken veya oyun oynarken farenin ekranda kalmaması için:
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        
+        // Ne olur ne olmaz zamanın aktığından emin olalım
+        Time.timeScale = 1f; 
+        isPaused = false;
     }
 
     public void Resume()
@@ -47,6 +55,10 @@ public class PauseManager : MonoBehaviour
         pauseMenuRoot.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
+
+        // Oyuna dönünce fareyi gizle ki karakteri/kamerayı yönetebil
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Pause()
@@ -55,6 +67,8 @@ public class PauseManager : MonoBehaviour
         ShowMainMenu();
         Time.timeScale = 0f;
         isPaused = true;
+        
+        // Menü açılınca fare görünür olsun ki butonlara tıklayabilelim
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }

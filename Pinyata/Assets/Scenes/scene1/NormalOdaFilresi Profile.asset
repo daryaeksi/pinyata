@@ -17,7 +17,6 @@ MonoBehaviour:
   - {fileID: 7728153848755526709}
   - {fileID: 6527426358353891714}
   - {fileID: 4588066919626102241}
-  - {fileID: 1558048765732555697}
 --- !u!114 &212609426256481715
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -36,7 +35,7 @@ MonoBehaviour:
     m_Value: -0.91
   contrast:
     m_OverrideState: 1
-    m_Value: 77
+    m_Value: 39
   colorFilter:
     m_OverrideState: 0
     m_Value: {r: 1, g: 1, b: 1, a: 1}
@@ -45,26 +44,6 @@ MonoBehaviour:
     m_Value: 0
   saturation:
     m_OverrideState: 0
-    m_Value: 0
---- !u!114 &1558048765732555697
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e021b4c809a781e468c2988c016ebbea, type: 3}
-  m_Name: ColorLookup
-  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.ColorLookup
-  active: 1
-  texture:
-    m_OverrideState: 1
-    m_Value: {fileID: 2800000, guid: 9addcbea0bde04987a45d2a22c7c4b98, type: 3}
-    dimension: 1
-  contribution:
-    m_OverrideState: 1
     m_Value: 0
 --- !u!114 &4588066919626102241
 MonoBehaviour:

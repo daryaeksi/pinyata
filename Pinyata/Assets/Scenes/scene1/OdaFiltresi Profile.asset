@@ -52,7 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.LensDistortion
   active: 1
   intensity:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: -0.22
   xMultiplier:
     m_OverrideState: 1
@@ -166,11 +166,6 @@ MonoBehaviour:
   - {fileID: 750490870895690786}
   - {fileID: -92798473791491396}
   - {fileID: -7667982559831779333}
-  - {fileID: -6214543364178908460}
-  - {fileID: 6938479768034081381}
-  - {fileID: 6323874268611523993}
-  - {fileID: 4823940081567471247}
-  - {fileID: -8006662438558236640}
 --- !u!114 &750490870895690786
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -189,7 +184,7 @@ MonoBehaviour:
     m_Value: -1
   contrast:
     m_OverrideState: 1
-    m_Value: 49
+    m_Value: 42
   colorFilter:
     m_OverrideState: 1
     m_Value: {r: 0.9150943, g: 0.5384916, b: 0.51366144, a: 1}
@@ -221,9 +216,6 @@ MonoBehaviour:
   fogColor:
     m_OverrideState: 1
     m_Value: {r: 0, g: 0, b: 0, a: 1}
-  ambientColor:
-    m_OverrideState: 0
-    m_Value: {r: 0.1, g: 0.1, b: 0.1, a: 0.1}
   fogNear:
     m_OverrideState: 0
     m_Value: 1
@@ -257,7 +249,7 @@ MonoBehaviour:
   active: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0.259
+    m_Value: 0.28
 --- !u!114 &6323874268611523993
 MonoBehaviour:
   m_ObjectHideFlags: 3
