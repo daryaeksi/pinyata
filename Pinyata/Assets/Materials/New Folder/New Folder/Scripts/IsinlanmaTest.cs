@@ -74,6 +74,9 @@ public class IsinlanmaTesti : MonoBehaviour
         if (fpsController != null)
             fpsController.OnRoomChanged(oda2deyim);
 
+        // Sahnedeki MusicManager'ı bul
+        MusicManager mm = Object.FindFirstObjectByType<MusicManager>();
+
         // --- 4. ATMOSFER VE MÜZİK GÜNCELLEME ---
         if (oda2deyim)
         {
@@ -82,9 +85,9 @@ public class IsinlanmaTesti : MonoBehaviour
             RenderSettings.fogColor = sisRengi;
             RenderSettings.fogDensity = sisYogunlugu;
 
-            if (MusicManager.instance != null)
+            if (mm != null)
             {
-                MusicManager.instance.PlayIsinlanmaMusic();
+                mm.PlayIsinlanmaMusic();
             }
         }
         else
@@ -92,9 +95,9 @@ public class IsinlanmaTesti : MonoBehaviour
             if (normalGokyuzu != null) RenderSettings.skybox = normalGokyuzu;
             RenderSettings.fog = false; 
 
-            if (MusicManager.instance != null)
+            if (mm != null)
             {
-                MusicManager.instance.StopMusic();
+                mm.StopMusic();
             }
         }
 

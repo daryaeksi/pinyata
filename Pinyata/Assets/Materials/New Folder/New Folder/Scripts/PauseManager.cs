@@ -3,7 +3,12 @@ using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
 {
-    public static bool isPaused = false;
+    [Header("Oyuncu Kontrolü")]
+    [Tooltip("Boş bıraksan bile kod oyun başlarken otomatik bulacaktır")]
+    public SimpleFPSController fpsKontrolcu; 
+
+    [Header("Özel İmleç (Cursor)")]
+    public Texture2D ozelImlec; 
 
     [Header("UI Panels")]
     public GameObject pauseMenuRoot;     
@@ -12,87 +17,99 @@ public class PauseManager : MonoBehaviour
     public GameObject controlsContent;  
     public GameObject quitContent;      
 
+    // Sadece Inspector'dan takip edebilmen için duruyor, kod artık buna bağımlı değil
+    [HideInInspector] public bool isPaused = false;
+
     void Start()
     {
-        // Oyun başladığında ayarları sıfırla
-        Time.timeScale = 1f;
-        isPaused = false;
-        
-        if(pauseMenuRoot != null) pauseMenuRoot.SetActive(false);
-        
-        // Fareyi menü için görünür yap
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
+        // GÜVENLİK DUVARI: Eğer sürüklemeyi unuttuysan kod oyuncuyu otomatik bulur
+        if (fpsKontrolcu == null)
+        {
+            fpsKontrolcu = Object.FindFirstObjectByType<SimpleFPSController>();
+        }
+
+        // Oyunu temiz bir şekilde başlat
+        Resume(); 
     }
 
     void Update()
     {
-        // Ana menüdeysen TAB tuşu çalışmasın (menü zaten açık)
-        // Sadece oyun içindeyken (yani ana menü paneli kapalıyken) çalışsın
-        if (mainMenuContent != null && mainMenuContent.activeInHierarchy) return;
-
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            if (isPaused) Resume();
-            else Pause();
+            // KESİN ÇÖZÜM: Değişkene değil, doğrudan panelin gerçek durumuna bakıyoruz!
+            if (pauseMenuRoot != null && pauseMenuRoot.activeSelf) 
+            {
+                Resume();
+            }
+            else 
+            {
+                Pause();
+            }
         }
     }
 
-    // NEW GAME BUTONU İÇİN
     public void StartGame()
     {
-        // Panelleri kapat ve oyunu başlat
-        if(pauseMenuRoot != null) pauseMenuRoot.SetActive(false);
-        
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        
-        Time.timeScale = 1f; 
-        isPaused = false;
+        Resume();
     }
 
     public void Resume()
     {
-        pauseMenuRoot.SetActive(false);
+        if (pauseMenuRoot != null) pauseMenuRoot.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
 
+        // Fareyi oyun moduna sok
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+
+        // FPS kontrolcüsünü tekrar aç (Kamera dönebilsin)
+        if (fpsKontrolcu != null) fpsKontrolcu.enabled = true;
     }
 
     void Pause()
     {
-        pauseMenuRoot.SetActive(true);
+        if (pauseMenuRoot != null) pauseMenuRoot.SetActive(true);
         ShowMainMenu(); 
-        Time.timeScale = 0f;
+        Time.timeScale = 0f; // Fizikleri ve zamanı durdurur
         isPaused = true;
         
+        // Fareyi menü moduna sok
         Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
+        
+        // İŞLETİM SİSTEMİ ENGELİ: Fare oyun penceresinden dışarı (görev çubuğuna) çıkamaz
+        Cursor.lockState = CursorLockMode.Confined;
+
+        if (ozelImlec != null)
+        {
+            Cursor.SetCursor(ozelImlec, Vector2.zero, CursorMode.Auto);
+        }
+
+        // FPS kontrolcüsünü dondur (Kamera dönmeyi bıraksın ve fareyi çalmasın)
+        if (fpsKontrolcu != null) fpsKontrolcu.enabled = false;
     }
 
     public void ShowMainMenu()
     {
-        mainMenuContent.SetActive(true);
-        optionsContent.SetActive(false);
-        controlsContent.SetActive(false);
-        quitContent.SetActive(false); 
+        if (mainMenuContent != null) mainMenuContent.SetActive(true);
+        if (optionsContent != null) optionsContent.SetActive(false);
+        if (controlsContent != null) controlsContent.SetActive(false);
+        if (quitContent != null) quitContent.SetActive(false); 
     }
 
-    // BUTONLARIN İÇİN GEREKLİ FONKSİYONLAR
     public void OpenOptions() { SetPanel(optionsContent); }
     public void OpenControls() { SetPanel(controlsContent); }
     public void OpenQuit() { SetPanel(quitContent); } 
 
     private void SetPanel(GameObject panelToOpen)
     {
-        mainMenuContent.SetActive(false);
-        optionsContent.SetActive(false);
-        controlsContent.SetActive(false);
-        quitContent.SetActive(false); 
+        if (mainMenuContent != null) mainMenuContent.SetActive(false);
+        if (optionsContent != null) optionsContent.SetActive(false);
+        if (controlsContent != null) controlsContent.SetActive(false);
+        if (quitContent != null) quitContent.SetActive(false); 
         
-        panelToOpen.SetActive(true);
+        if (panelToOpen != null) panelToOpen.SetActive(true);
     }
 
     public void QuitToMainMenu()
@@ -102,10 +119,8 @@ public class PauseManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     } 
 
-    // OYUNDAN ÇIKIŞ BUTONU İÇİN
     public void QuitGame()
     {
-        Debug.Log("Oyundan çıkılıyor...");
         Application.Quit();
     }
 }
