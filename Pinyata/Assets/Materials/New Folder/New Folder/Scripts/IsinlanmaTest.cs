@@ -14,6 +14,11 @@ public class IsinlanmaTesti : MonoBehaviour
     public Color sisRengi = new Color(0.5f, 0, 0);
     public float sisYogunlugu = 0.05f;
 
+    // >>> YENİ EKLENEN KISIM: Işınlanma Sesi Ayarları <<<
+    [Header("Ses Ayarları")]
+    public AudioSource isinlanmaSesKaynagi; 
+    public AudioClip isinlanmaSesi;         
+
     private bool oda2deyim = false; 
     private bool isinlanmaBasladi = false;
 
@@ -21,6 +26,12 @@ public class IsinlanmaTesti : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.T) && !isinlanmaBasladi)
         {
+            // >>> YENİ EKLENEN KISIM: T'ye basıldığı an sesi çal <<<
+            if (isinlanmaSesKaynagi != null && isinlanmaSesi != null)
+            {
+                isinlanmaSesKaynagi.PlayOneShot(isinlanmaSesi);
+            }
+
             StartCoroutine(GlitchIsinlanma());
         }
     }
@@ -71,7 +82,6 @@ public class IsinlanmaTesti : MonoBehaviour
             RenderSettings.fogColor = sisRengi;
             RenderSettings.fogDensity = sisYogunlugu;
 
-            // >>> EKLENEN SATIR: Oda 2'ye geçince ışınlanma müziğini çal
             if (MusicManager.instance != null)
             {
                 MusicManager.instance.PlayIsinlanmaMusic();
@@ -82,7 +92,6 @@ public class IsinlanmaTesti : MonoBehaviour
             if (normalGokyuzu != null) RenderSettings.skybox = normalGokyuzu;
             RenderSettings.fog = false; 
 
-            // >>> EKLENEN SATIR: Oda 1'e geri dönünce müziği tamamen sustur
             if (MusicManager.instance != null)
             {
                 MusicManager.instance.StopMusic();

@@ -371,6 +371,7 @@ GameObject:
   - component: {fileID: 16869123}
   - component: {fileID: 16869122}
   - component: {fileID: 16869126}
+  - component: {fileID: 16869127}
   m_Layer: 5
   m_Name: Back
   m_TagString: Untagged
@@ -503,6 +504,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c3ad4925eaa84207888b4c4fb21cc91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AlphaButtonHitbox
+--- !u!114 &16869127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 16869120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventTrigger
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2139365937}
+          m_TargetAssemblyTypeName: ButonSesi, Assembly-CSharp
+          m_MethodName: BasincaCal
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2139365937}
+          m_TargetAssemblyTypeName: ButonSesi, Assembly-CSharp
+          m_MethodName: BirakincaCal
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &21134186
 GameObject:
   m_ObjectHideFlags: 0
@@ -1409,7 +1455,7 @@ RectTransform:
   m_Father: {fileID: 2010007839}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 4.620369, y: 1.9}
   m_SizeDelta: {x: 31.83, y: 0.0000076293945}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4858,6 +4904,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8878951384765256520, guid: 8128d04d1b7ca4f7684f1de7d8fe98c7, type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: -8102248941582948886, guid: 8128d04d1b7ca4f7684f1de7d8fe98c7, type: 3}
@@ -4892,6 +4942,7 @@ GameObject:
   - component: {fileID: 205755488}
   - component: {fileID: 205755490}
   - component: {fileID: 205755492}
+  - component: {fileID: 205755493}
   m_Layer: 5
   m_Name: Controls
   m_TagString: Untagged
@@ -5024,6 +5075,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c3ad4925eaa84207888b4c4fb21cc91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AlphaButtonHitbox
+--- !u!114 &205755493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 205755486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventTrigger
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2139365937}
+          m_TargetAssemblyTypeName: ButonSesi, Assembly-CSharp
+          m_MethodName: BasincaCal
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2139365937}
+          m_TargetAssemblyTypeName: ButonSesi, Assembly-CSharp
+          m_MethodName: BirakincaCal
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &219017321 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7934216728481487877, guid: b37633f845797430facd3cd5271df408, type: 3}
@@ -5385,9 +5481,9 @@ AudioSource:
   m_GameObject: {fileID: 232131435}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 8699815294372009461, guid: 058937392d0d94260929de2d6afcd29a, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 37219174cd5a64894ad300cd0c7861fb, type: 3}
+  m_Resource: {fileID: 8300000, guid: dd0545a48cbf0405ca5b72b798777d64, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.412
   m_Pitch: 1
@@ -7259,7 +7355,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4ffcc1d0b96fd49a392a13e758ff8f67, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.173
+      value: -2.844
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4ffcc1d0b96fd49a392a13e758ff8f67, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7267,7 +7363,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4ffcc1d0b96fd49a392a13e758ff8f67, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.664
+      value: -3.558
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4ffcc1d0b96fd49a392a13e758ff8f67, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7391,13 +7487,25 @@ MonoBehaviour:
   m_FillRect: {fileID: 0}
   m_HandleRect: {fileID: 72514303}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1417958339}
+        m_TargetAssemblyTypeName: SesAyarlari, Assembly-CSharp
+        m_MethodName: SfxSesiAyarla
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &356760135
 GameObject:
   m_ObjectHideFlags: 0
@@ -8527,6 +8635,7 @@ GameObject:
   - component: {fileID: 481434619}
   - component: {fileID: 481434620}
   - component: {fileID: 481434622}
+  - component: {fileID: 481434623}
   m_Layer: 5
   m_Name: Options
   m_TagString: Untagged
@@ -8671,6 +8780,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c3ad4925eaa84207888b4c4fb21cc91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AlphaButtonHitbox
+--- !u!114 &481434623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481434615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventTrigger
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2139365937}
+          m_TargetAssemblyTypeName: ButonSesi, Assembly-CSharp
+          m_MethodName: BasincaCal
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2139365937}
+          m_TargetAssemblyTypeName: ButonSesi, Assembly-CSharp
+          m_MethodName: BirakincaCal
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &493063398 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c7b6d4ceb4f4f496fba1105a7ba769d2, type: 3}
@@ -9490,7 +9644,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &564109189
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -11359,7 +11513,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &681324774
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -11966,6 +12120,7 @@ GameObject:
   - component: {fileID: 716489728}
   - component: {fileID: 716489727}
   - component: {fileID: 716489725}
+  - component: {fileID: 716489731}
   m_Layer: 5
   m_Name: X
   m_TagString: Untagged
@@ -12110,6 +12265,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 716489723}
   m_CullTransparentMesh: 1
+--- !u!114 &716489731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716489723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventTrigger
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2139365937}
+          m_TargetAssemblyTypeName: ButonSesi, Assembly-CSharp
+          m_MethodName: BasincaCal
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2139365937}
+          m_TargetAssemblyTypeName: ButonSesi, Assembly-CSharp
+          m_MethodName: BirakincaCal
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &718432283 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8416272007918961125, guid: ff2a761b151c949c2b4b2173227cd57a, type: 3}
@@ -14079,6 +14279,7 @@ GameObject:
   - component: {fileID: 769442811}
   - component: {fileID: 769442810}
   - component: {fileID: 769442809}
+  - component: {fileID: 769442814}
   m_Layer: 5
   m_Name: X (1)
   m_TagString: Untagged
@@ -14223,6 +14424,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 769442807}
   m_CullTransparentMesh: 1
+--- !u!114 &769442814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 769442807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventTrigger
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2139365937}
+          m_TargetAssemblyTypeName: ButonSesi, Assembly-CSharp
+          m_MethodName: BasincaCal
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2139365937}
+          m_TargetAssemblyTypeName: ButonSesi, Assembly-CSharp
+          m_MethodName: BirakincaCal
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &771104173 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 122e1bca1b9bc430e927f7365d2997c6, type: 3}
@@ -14325,7 +14571,7 @@ RectTransform:
   m_Father: {fileID: 1812179790}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -14981,6 +15227,7 @@ GameObject:
   - component: {fileID: 792530078}
   - component: {fileID: 792530077}
   - component: {fileID: 792530076}
+  - component: {fileID: 792530080}
   m_Layer: 5
   m_Name: Back (1)
   m_TagString: Untagged
@@ -15113,6 +15360,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 792530074}
   m_CullTransparentMesh: 1
+--- !u!114 &792530080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 792530074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventTrigger
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2139365937}
+          m_TargetAssemblyTypeName: ButonSesi, Assembly-CSharp
+          m_MethodName: BasincaCal
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2139365937}
+          m_TargetAssemblyTypeName: ButonSesi, Assembly-CSharp
+          m_MethodName: BirakincaCal
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &797185387
 GameObject:
   m_ObjectHideFlags: 0
@@ -15330,6 +15622,87 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 805562902}
   m_CullTransparentMesh: 1
+--- !u!1001 &823201535
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 2fb2f11d64abe44b69a0e78280c81981, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.11
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2fb2f11d64abe44b69a0e78280c81981, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.11
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2fb2f11d64abe44b69a0e78280c81981, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.11
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2fb2f11d64abe44b69a0e78280c81981, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.418
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2fb2f11d64abe44b69a0e78280c81981, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.346
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2fb2f11d64abe44b69a0e78280c81981, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.547
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2fb2f11d64abe44b69a0e78280c81981, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9455011
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2fb2f11d64abe44b69a0e78280c81981, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2fb2f11d64abe44b69a0e78280c81981, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.32561895
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2fb2f11d64abe44b69a0e78280c81981, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2fb2f11d64abe44b69a0e78280c81981, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2fb2f11d64abe44b69a0e78280c81981, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 38.006
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2fb2f11d64abe44b69a0e78280c81981, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2fb2f11d64abe44b69a0e78280c81981, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7120755992946672073, guid: 2fb2f11d64abe44b69a0e78280c81981, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: f4d2bee3c4ac74880be51ee671963efa, type: 2}
+    - target: {fileID: -1841004969958252650, guid: 2fb2f11d64abe44b69a0e78280c81981, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1216a7c757ed841c580a573494bf09df, type: 2}
+    - target: {fileID: 919132149155446097, guid: 2fb2f11d64abe44b69a0e78280c81981, type: 3}
+      propertyPath: m_Name
+      value: Oranmental Box
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2fb2f11d64abe44b69a0e78280c81981, type: 3}
 --- !u!1001 &827299483
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15524,7 +15897,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
+  - {fileID: 1305341815}
   - {fileID: 228087045}
+  - {fileID: 1845195449}
   - {fileID: 1844425144}
   - {fileID: 1273881715}
   - {fileID: 596847582}
@@ -16039,7 +16414,7 @@ GameObject:
   - component: {fileID: 847218107}
   - component: {fileID: 847218108}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: Volume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16111,13 +16486,25 @@ MonoBehaviour:
   m_FillRect: {fileID: 2074930865}
   m_HandleRect: {fileID: 783153725}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1417958339}
+        m_TargetAssemblyTypeName: SesAyarlari, Assembly-CSharp
+        m_MethodName: MasterSesiAyarla
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &857374682
 GameObject:
   m_ObjectHideFlags: 0
@@ -16437,7 +16824,7 @@ RectTransform:
   m_Father: {fileID: 530003710}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 4.620369, y: 1.9}
   m_SizeDelta: {x: 31.83, y: 0.0000076293945}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -16912,6 +17299,7 @@ GameObject:
   - component: {fileID: 935730550}
   - component: {fileID: 935730549}
   - component: {fileID: 935730547}
+  - component: {fileID: 935730553}
   m_Layer: 5
   m_Name: Save
   m_TagString: Untagged
@@ -17044,6 +17432,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 935730545}
   m_CullTransparentMesh: 1
+--- !u!114 &935730553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935730545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventTrigger
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2139365937}
+          m_TargetAssemblyTypeName: ButonSesi, Assembly-CSharp
+          m_MethodName: BasincaCal
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2139365937}
+          m_TargetAssemblyTypeName: ButonSesi, Assembly-CSharp
+          m_MethodName: BirakincaCal
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &938986746
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17721,7 +18154,7 @@ RectTransform:
   m_Father: {fileID: 1761411078}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -19553,6 +19986,7 @@ GameObject:
   - component: {fileID: 1078853684}
   - component: {fileID: 1078853685}
   - component: {fileID: 1078853687}
+  - component: {fileID: 1078853688}
   m_Layer: 5
   m_Name: Quit
   m_TagString: Untagged
@@ -19697,6 +20131,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c3ad4925eaa84207888b4c4fb21cc91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AlphaButtonHitbox
+--- !u!114 &1078853688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1078853680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventTrigger
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2139365937}
+          m_TargetAssemblyTypeName: ButonSesi, Assembly-CSharp
+          m_MethodName: BasincaCal
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2139365937}
+          m_TargetAssemblyTypeName: ButonSesi, Assembly-CSharp
+          m_MethodName: BirakincaCal
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1081322424
 GameObject:
   m_ObjectHideFlags: 0
@@ -20976,6 +21455,7 @@ GameObject:
   - component: {fileID: 1144485613}
   - component: {fileID: 1144485614}
   - component: {fileID: 1144485616}
+  - component: {fileID: 1144485617}
   m_Layer: 5
   m_Name: Resume
   m_TagString: Untagged
@@ -21120,6 +21600,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c3ad4925eaa84207888b4c4fb21cc91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AlphaButtonHitbox
+--- !u!114 &1144485617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1144485609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventTrigger
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2139365937}
+          m_TargetAssemblyTypeName: ButonSesi, Assembly-CSharp
+          m_MethodName: BasincaCal
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2139365937}
+          m_TargetAssemblyTypeName: ButonSesi, Assembly-CSharp
+          m_MethodName: BirakincaCal
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1161375559
 GameObject:
   m_ObjectHideFlags: 0
@@ -21243,6 +21768,7 @@ GameObject:
   - component: {fileID: 1186992832}
   - component: {fileID: 1186992831}
   - component: {fileID: 1186992830}
+  - component: {fileID: 1186992835}
   m_Layer: 5
   m_Name: Exit Game
   m_TagString: Untagged
@@ -21387,6 +21913,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1186992828}
   m_CullTransparentMesh: 1
+--- !u!114 &1186992835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1186992828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventTrigger
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2139365937}
+          m_TargetAssemblyTypeName: ButonSesi, Assembly-CSharp
+          m_MethodName: BasincaCal
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2139365937}
+          m_TargetAssemblyTypeName: ButonSesi, Assembly-CSharp
+          m_MethodName: BirakincaCal
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &1190585767
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23234,7 +23805,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1273881715
 RectTransform:
   m_ObjectHideFlags: 0
@@ -23729,6 +24300,92 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1305341814
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1305341815}
+  - component: {fileID: 1305341818}
+  - component: {fileID: 1305341817}
+  - component: {fileID: 1305341816}
+  m_Layer: 5
+  m_Name: Static
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1305341815
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1305341814}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 22.9, y: 12.820001, z: 12.820001}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 831296773}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1305341816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1305341814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41715467ee7f24faf92bc4fe5a360ce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TVKarincalanma
+  karincalanmaResmi: {fileID: 1305341817}
+--- !u!114 &1305341817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1305341814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RawImage
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.0627451}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 2800000, guid: 976b7da74321040d7978c963da175a7e, type: 3}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!222 &1305341818
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1305341814}
+  m_CullTransparentMesh: 1
 --- !u!1001 &1308983165
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25925,7 +26582,7 @@ AudioSource:
   m_GameObject: {fileID: 1381178365}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 6552786464059576237, guid: 058937392d0d94260929de2d6afcd29a, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 6238b5a833cd04b2f822a903be5cc40a, type: 3}
   m_PlayOnAwake: 1
@@ -26119,7 +26776,7 @@ GameObject:
   - component: {fileID: 1401247584}
   - component: {fileID: 1401247585}
   m_Layer: 5
-  m_Name: Slider (1)
+  m_Name: SFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26191,13 +26848,25 @@ MonoBehaviour:
   m_FillRect: {fileID: 1786968802}
   m_HandleRect: {fileID: 972939092}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1417958339}
+        m_TargetAssemblyTypeName: SesAyarlari, Assembly-CSharp
+        m_MethodName: SfxSesiAyarla
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1403185213
 GameObject:
   m_ObjectHideFlags: 0
@@ -26603,13 +27272,14 @@ GameObject:
   - component: {fileID: 1417958337}
   - component: {fileID: 1417958336}
   - component: {fileID: 1417958335}
+  - component: {fileID: 1417958339}
   m_Layer: 5
   m_Name: OptionsMain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1417958335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26697,6 +27367,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1417958339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1417958334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56c85b4ae1bab48d2be5b12197d92a8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SesAyarlari
+  sesMixer: {fileID: 24100000, guid: 058937392d0d94260929de2d6afcd29a, type: 2}
+  masterSlider: {fileID: 847218108}
+  muzikSlider: {fileID: 1963453011}
+  sfxSlider: {fileID: 1401247585}
 --- !u!1 &1420603490
 GameObject:
   m_ObjectHideFlags: 0
@@ -29065,7 +29751,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ec03bd9f2372245eeaa356776cef458e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.464
+      value: 8.39
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ec03bd9f2372245eeaa356776cef458e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -29073,7 +29759,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ec03bd9f2372245eeaa356776cef458e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.757
+      value: -1.75
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ec03bd9f2372245eeaa356776cef458e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -31001,8 +31687,8 @@ Transform:
   m_GameObject: {fileID: 1584626904}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.599, y: 2.12788, z: 1.292}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -2.487, y: 2.12788, z: 1.292}
+  m_LocalScale: {x: 0.91, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -32222,6 +32908,7 @@ GameObject:
   - component: {fileID: 1696555587}
   - component: {fileID: 1696555586}
   - component: {fileID: 1696555585}
+  - component: {fileID: 1696555589}
   m_Layer: 5
   m_Name: Back (1)
   m_TagString: Untagged
@@ -32354,6 +33041,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1696555583}
   m_CullTransparentMesh: 1
+--- !u!114 &1696555589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696555583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventTrigger
+  m_Delegates:
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2139365937}
+          m_TargetAssemblyTypeName: ButonSesi, Assembly-CSharp
+          m_MethodName: BirakincaCal
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2139365937}
+          m_TargetAssemblyTypeName: ButonSesi, Assembly-CSharp
+          m_MethodName: BasincaCal
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1697881829
 GameObject:
   m_ObjectHideFlags: 0
@@ -32994,6 +33726,7 @@ GameObject:
   - component: {fileID: 1718669534}
   - component: {fileID: 1718669533}
   - component: {fileID: 1718669532}
+  - component: {fileID: 1718669537}
   m_Layer: 5
   m_Name: X (2)
   m_TagString: Untagged
@@ -33138,6 +33871,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1718669530}
   m_CullTransparentMesh: 1
+--- !u!114 &1718669537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1718669530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventTrigger
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2139365937}
+          m_TargetAssemblyTypeName: ButonSesi, Assembly-CSharp
+          m_MethodName: BasincaCal
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2139365937}
+          m_TargetAssemblyTypeName: ButonSesi, Assembly-CSharp
+          m_MethodName: BirakincaCal
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1731416682 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3751295456496034547, guid: 8128d04d1b7ca4f7684f1de7d8fe98c7, type: 3}
@@ -33275,9 +34053,9 @@ AudioSource:
   m_GameObject: {fileID: 1737448685}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 8699815294372009461, guid: 058937392d0d94260929de2d6afcd29a, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 37219174cd5a64894ad300cd0c7861fb, type: 3}
+  m_Resource: {fileID: 8300000, guid: dd0545a48cbf0405ca5b72b798777d64, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.412
   m_Pitch: 1
@@ -33415,7 +34193,7 @@ AudioSource:
   m_GameObject: {fileID: 1737448685}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 8699815294372009461, guid: 058937392d0d94260929de2d6afcd29a, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 9f0b6a6c0c2564850929e2f18d7b2811, type: 3}
   m_PlayOnAwake: 0
@@ -34149,7 +34927,7 @@ RectTransform:
   m_Father: {fileID: 78174365}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -35580,6 +36358,81 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -28}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1845195448
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1845195449}
+  - component: {fileID: 1845195451}
+  - component: {fileID: 1845195450}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1845195449
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1845195448}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 22.8, y: 12.83, z: 12.83}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 831296773}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1845195450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1845195448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: a74e730b2e2d247639df065d2f0475cb, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1845195451
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1845195448}
+  m_CullTransparentMesh: 1
 --- !u!1001 &1849848867
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35829,6 +36682,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1852991691}
   - component: {fileID: 1852991692}
+  - component: {fileID: 1852991693}
   m_Layer: 0
   m_Name: MainMenuManager
   m_TagString: Untagged
@@ -35866,6 +36720,103 @@ MonoBehaviour:
   mainMenuRoot: {fileID: 803694223}
   optionsMain: {fileID: 1417958334}
   playerCharacter: {fileID: 369172853}
+--- !u!82 &1852991693
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1852991690}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 6552786464059576237, guid: 058937392d0d94260929de2d6afcd29a, type: 2}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1860775018
 GameObject:
   m_ObjectHideFlags: 0
@@ -36714,7 +37665,7 @@ AudioSource:
   m_GameObject: {fileID: 1910134278}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 058937392d0d94260929de2d6afcd29a, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
@@ -37284,7 +38235,7 @@ AudioSource:
   m_GameObject: {fileID: 1940014869}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 058937392d0d94260929de2d6afcd29a, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
@@ -38000,13 +38951,25 @@ MonoBehaviour:
   m_FillRect: {fileID: 0}
   m_HandleRect: {fileID: 888425251}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1417958339}
+        m_TargetAssemblyTypeName: SesAyarlari, Assembly-CSharp
+        m_MethodName: MuzikSesiAyarla
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 3
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1966690373 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9fa321ab85ed64249839bd2ce0cf9ac6, type: 3}
@@ -39573,6 +40536,8 @@ MonoBehaviour:
   normalGokyuzu: {fileID: 2100000, guid: 85cf0b004bc4a654b9e501efcce47902, type: 2}
   sisRengi: {r: 0.5, g: 0, b: 0, a: 1}
   sisYogunlugu: 0.05
+  isinlanmaSesKaynagi: {fileID: 2051666839}
+  isinlanmaSesi: {fileID: 8300000, guid: 3464ea7aed71147e688a4bccab08deb3, type: 3}
 --- !u!82 &2051666839
 AudioSource:
   m_ObjectHideFlags: 0
@@ -39582,7 +40547,7 @@ AudioSource:
   m_GameObject: {fileID: 2051666828}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 6552786464059576237, guid: 058937392d0d94260929de2d6afcd29a, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
@@ -39882,7 +40847,7 @@ RectTransform:
   m_Father: {fileID: 48918838}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -40828,6 +41793,8 @@ GameObject:
   - component: {fileID: 2139365935}
   - component: {fileID: 2139365934}
   - component: {fileID: 2139365933}
+  - component: {fileID: 2139365937}
+  - component: {fileID: 2139365938}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -40918,6 +41885,119 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &2139365937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2139365932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65276a2fcc64f467f9fbca0ad1f3184b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButonSesi
+  sesKaynagi: {fileID: 2139365938}
+  uzerineGelmeSesi: {fileID: 0}
+  basildiSesi: {fileID: 8300000, guid: 75214c0f44efe474f86c53cc8c1336fe, type: 3}
+  birakildiSesi: {fileID: 8300000, guid: 33bc6b84293d24a70be83d330954d5fc, type: 3}
+--- !u!82 &2139365938
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2139365932}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 6552786464059576237, guid: 058937392d0d94260929de2d6afcd29a, type: 2}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &2139654928
 GameObject:
   m_ObjectHideFlags: 0
@@ -43757,3 +44837,4 @@ SceneRoots:
   - {fileID: 1962278543}
   - {fileID: 1910134280}
   - {fileID: 1381178367}
+  - {fileID: 823201535}
