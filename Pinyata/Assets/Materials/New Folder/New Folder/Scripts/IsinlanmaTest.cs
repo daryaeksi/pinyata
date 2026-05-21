@@ -30,20 +30,17 @@ public class IsinlanmaTesti : MonoBehaviour
         isinlanmaBasladi = true;
 
         // --- 1. FİZİĞİ GEÇİCİ OLARAK DURDUR ---
-        // Eğer karakterde CharacterController varsa kapatıyoruz ki sapıtmasın
         CharacterController cc = oyuncu.GetComponent<CharacterController>();
         if (cc != null) cc.enabled = false;
 
-        // Eğer karakterde Rigidbody varsa yerçekimini ve fiziği donduruyoruz
         Rigidbody rb = oyuncu.GetComponent<Rigidbody>();
         bool rbKinematicDurumu = false;
         if (rb != null) 
         {
             rbKinematicDurumu = rb.isKinematic;
-            rb.isKinematic = true; // Karakteri %100 kodun kontrolüne (kinematik) alıyoruz
+            rb.isKinematic = true; 
         }
 
-        // Gidilecek yönü belirle
         Vector3 odaFarki = oda2deyim ? (oda1Merkez.position - oda2Merkez.position) : (oda2Merkez.position - oda1Merkez.position);
 
         // --- 2. GLITCH EFEKTİ ---
@@ -57,7 +54,7 @@ public class IsinlanmaTesti : MonoBehaviour
 
         // --- 3. ASIL IŞINLANMA VE YÜKSEKLİK AYARI ---
         Vector3 sonKonum = oyuncu.position + odaFarki;
-        sonKonum.y += 0.5f; // Adamı zeminin içine saplanmasın diye hafif havadan bırakıyoruz
+        sonKonum.y += 0.5f; 
         oyuncu.position = sonKonum;
         
         oda2deyim = !oda2deyim;
@@ -66,24 +63,35 @@ public class IsinlanmaTesti : MonoBehaviour
         if (fpsController != null)
             fpsController.OnRoomChanged(oda2deyim);
 
-        // --- 4. ATMOSFER GÜNCELLEME ---
+        // --- 4. ATMOSFER VE MÜZİK GÜNCELLEME ---
         if (oda2deyim)
         {
             if (kirmiziGokyuzu != null) RenderSettings.skybox = kirmiziGokyuzu;
             RenderSettings.fog = true;
             RenderSettings.fogColor = sisRengi;
             RenderSettings.fogDensity = sisYogunlugu;
+
+            // >>> EKLENEN SATIR: Oda 2'ye geçince ışınlanma müziğini çal
+            if (MusicManager.instance != null)
+            {
+                MusicManager.instance.PlayIsinlanmaMusic();
+            }
         }
         else
         {
             if (normalGokyuzu != null) RenderSettings.skybox = normalGokyuzu;
             RenderSettings.fog = false; 
+
+            // >>> EKLENEN SATIR: Oda 1'e geri dönünce müziği tamamen sustur
+            if (MusicManager.instance != null)
+            {
+                MusicManager.instance.StopMusic();
+            }
         }
 
         DynamicGI.UpdateEnvironment();
 
         // --- 5. FİZİĞİ GERİ AÇ ---
-        // Işınlanma bittiği için kontrolleri karaktere geri veriyoruz
         if (cc != null) cc.enabled = true;
         if (rb != null) rb.isKinematic = rbKinematicDurumu;
 

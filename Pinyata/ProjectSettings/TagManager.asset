@@ -12,6 +12,8 @@ TagManager:
   - Karakter
   - HedefNoktasi
   - Pinyata
+  - Cimen
+  - Tahta
   layers:
   - Default
   - TransparentFX

@@ -150,6 +150,12 @@ public class SimpleFPSController : MonoBehaviour
             anim.SetBool("IsWalking", false);
             StartCoroutine(RestoreWalkingState());
         }
+
+        // >>> YENİ EKLENEN KISIM: Ayak sesi ritmini odaya göre ayarla <<<
+        if (AyakSesi.instance != null)
+        {
+            AyakSesi.instance.SetAyakSesiHizi(gizliOdadaMi);
+        }
     }
 
     private System.Collections.IEnumerator RestoreWalkingState()
